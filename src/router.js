@@ -3,10 +3,23 @@ import { VerifySession, VerifyLogin } from './Guards/AuthGuard';
 import login from './Pages/Login.vue';
 import Home from './Pages/Home.vue'
 import Enfermedades from './Pages/Enfermedades.vue'
+import Usuarios from './Pages/Usuarios.vue'
+import Configuracion from './Pages/Configuracion.vue'
 
 const routes = [
   { path: '/login', component: login, beforeEnter: VerifyLogin },
-  { 'path': '/', component: Home, beforeEnter: VerifySession },
+  { path: '/', 
+    component: Home,
+    beforeEnter: VerifySession, 
+    children: 
+    [
+      { 'path': '/enfermedades', component: Enfermedades },
+      { 'path': '/enfermedadDash/:id', component: Enfermedades, props : true },
+      { 'path': '/usuarios', component: Usuarios },
+      { 'path': '/configuracion', component: Configuracion },
+
+    ]
+  },
   { 'path': '/enfermedades', component: Enfermedades }
 ];
 

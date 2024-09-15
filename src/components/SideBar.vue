@@ -52,10 +52,8 @@
     },
     menuItems: {
       type: Array,
-      default: () => [
-        { name: 'Enfermedaes', icon: HomeIcon, href: '/' },
-        { name: 'Enfermedades', icon: ChartBarIcon, href: '/estadisticas' },
-        { name: 'Reportes', icon: FileTextIcon, href: '/reportes' },
+      default: () => [  
+        { name: 'Enfermedades', icon: ChartBarIcon, href: '/enfermedades' },
         { name: 'Usuarios', icon: UsersIcon, href: '/usuarios' },
         { name: 'Configuración', icon: SettingsIcon, href: '/configuracion' },
       ]

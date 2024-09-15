@@ -5,7 +5,7 @@
     <div class="flex-1 p-4 lg:ml-64 bg-[#2492d1]" style="height: 67px;">
     </div>
     <div class="flex-1 p-4 lg:ml-64">
-        <p>hola</p>
+        <router-view></router-view>
     </div>
   </template>
   
