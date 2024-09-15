@@ -20,7 +20,6 @@ const routes = [
       { 'path': '/enfermedadDash/:id/:name', component: EnfermedadesDash, props : true },
       { 'path': '/usuarios', component: Usuarios },
       { 'path': '/configuracion', component: Configuracion },
-      { 'path': '/mapa', component: Mapa }
 
     ]
   },
