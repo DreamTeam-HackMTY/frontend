@@ -1,0 +1,37 @@
+{
+    "data":{
+        "labels": [ "January", "February", "March" ],
+        "datasets": [
+            {
+                "label": "Casos",
+                "data": [20, 40, 80],
+                "fill": false,
+                "borderColor": "green",
+                "backgroundColor": "#0cc0df"
+            },
+            {
+                "label": "Muertes",
+                "data": [90, 40, 80],
+                "fill": false,
+                "borderColor": "green",
+                "backgroundColor": "#ff4069"
+            }
+        ]
+    },
+    "options":{
+        "plugins": {
+        "title": {
+                "display": true
+            }
+        },
+        "responsive": true,
+        "scales": {
+            "x": {
+                "stacked": true
+            },
+            "y": {
+                "stacked": true
+            }
+        }
+    }
+}

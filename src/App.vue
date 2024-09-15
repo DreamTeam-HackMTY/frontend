@@ -3,9 +3,11 @@
 </script>
 
 <template>
-  <router-view/>
+  <div id="app">
+    <router-view></router-view>
+  </div>
 </template>
 
-<style scoped>
-
-</style>
+<script setup>
+import { HomeIcon, ChartBarIcon, FileTextIcon } from 'lucide-vue-next'
+</script>
