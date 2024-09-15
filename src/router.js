@@ -5,6 +5,7 @@ import Home from './Pages/Home.vue'
 import Enfermedades from './Pages/Enfermedades.vue'
 import Usuarios from './Pages/Usuarios.vue'
 import Configuracion from './Pages/Configuracion.vue'
+import Mapa from './Pages/Mapa.vue';
 
 const routes = [
   { path: '/login', component: login, beforeEnter: VerifyLogin },
@@ -18,6 +19,7 @@ const routes = [
       { 'path': '/enfermedadDash/:id', component: Enfermedades, props : true },
       { 'path': '/usuarios', component: Usuarios },
       { 'path': '/configuracion', component: Configuracion },
+      { 'path': '/mapa', component: Mapa }
 
     ]
   },
