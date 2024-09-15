@@ -56,7 +56,7 @@
               
             </button>
             <button 
-              @click="cerrarSession" 
+              @click="logout" 
               class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Cerrar Sesión
@@ -85,15 +85,4 @@
     alert('Perfil actualizado con éxito')
   }
   
-  const cerrarSession = async () => {
-    try {
-      await logout()
-      const router = useRouter()
-      localStorage.clear()
-      router.push('/login')
-    } catch (error) {
-      console.error(error)
-      localStorage.clear()
-    }
-  }
   </script>

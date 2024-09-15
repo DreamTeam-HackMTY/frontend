@@ -115,7 +115,7 @@
   <script setup>
   import { ref, onMounted } from 'vue'
   import { useRouter } from 'vue-router';
-  import { createEnfermedad, readEnfermedades, updateEnfermedad } from '../services/enfermedades';
+  import { createEnfermedad, readEnfermedades, updateEnfermedad, deleteEnfermedad  } from '../services/enfermedades';
 
   const router = useRouter();
   const goToDiseaseDashboard = (id) => {
@@ -179,9 +179,14 @@
     }
   }
   
-  const deleteDisease = (id) => {
+  const deleteDisease = async (id) => {
     if (confirm('¿Estás seguro de que quieres eliminar esta enfermedad?')) {
-      diseases.value = diseases.value.filter(d => d.id !== id)
+      try {
+        await deleteEnfermedad(id)
+        diseases.value = diseases.value.filter(d => d.id !== id)
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 
@@ -189,9 +194,9 @@
     readEnfermedades().then(data => {
       console.log(data.data.data)
       diseases.value = data.data.data.map(disease => ({
-        id: disease.id,
-        name: disease.name,
-        description: disease.description,
+        id: disease?.id,
+        name: disease?.name,
+        description: disease?.description,
         totalCases: disease?.totalCases || 0,
         totalDeaths: disease?.totalDeaths || 0,
       }))
