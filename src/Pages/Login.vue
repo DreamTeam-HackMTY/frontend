@@ -36,9 +36,9 @@
                     </div>
 
                     <div class="text-sm">
-                        <a href="#" class="font-medium text-[#2492d1] hover:text-[#1c74a5]">
+                        <!-- <a href="#" class="font-medium text-[#2492d1] hover:text-[#1c74a5]">
                             ¿Olvidaste tu contraseña?
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
@@ -60,34 +60,8 @@
                     </div>
                     <div class="relative flex justify-center text-sm">
                         <span class="px-2 bg-gray-50 text-gray-500">
-                            O continúa con
+                            
                         </span>
-                    </div>
-                </div>
-
-                <div class="mt-6 grid grid-cols-3 gap-3">
-                    <div>
-                        <a href="#"
-                            class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                            <span class="sr-only">Iniciar sesión con Facebook</span>
-                            
-                        </a>
-                    </div>
-
-                    <div>
-                        <a href="#"
-                            class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                            <span class="sr-only">Iniciar sesión con Twitter</span>
-                            
-                        </a>
-                    </div>
-
-                    <div>
-                        <a href="#"
-                            class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                            <span class="sr-only">Iniciar sesión con GitHub</span>
-                            
-                        </a>
                     </div>
                 </div>
             </div>
@@ -97,14 +71,24 @@
 
 <script setup>
 import { ref } from 'vue'
+import { login } from '../services/session';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const email = ref('')
 const password = ref('')
 
-const handleSubmit = () => {
-    // Aquí iría la lógica para manejar el inicio de sesión
-    console.log('Iniciando sesión con:', { email: email.value, password: password.value })
-    // Normalmente, aquí enviarías los datos a tu backend para autenticación
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        const res = await login({ email: email.value, password: password.value });
+        const data = res.data
+        localStorage.setItem('token', data.data.token);
+        router.push('/');
+    } catch (error) {
+        console.error(error);
+    }
 }
 </script>
 

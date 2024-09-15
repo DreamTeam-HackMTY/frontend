@@ -1,6 +1,6 @@
 import axios from './axios.js';
 
-const baseURL = 'enfermedades/'
+const baseURL = 'diseases/'
 
 export async function readEnfermedades(){
     try {
@@ -37,7 +37,7 @@ export async function createEnfermedad(data){
 
 export async function updateEnfermedad(id, data){
     try {
-        const response = await axios.put(`${baseURL}/${id}`, data)
+        const response = await axios.put(`${baseURL}${id}`, data)
         if(response.status < 300) return response
         else throw new Error("Error en al obtener los enfermedades") 
     } catch (error) {
@@ -48,7 +48,18 @@ export async function updateEnfermedad(id, data){
 
 export async function modifyEnfermedad(id, data){
     try {
-        const response = await axios.patch(`${baseURL}/${id}`, data)
+        const response = await axios.patch(`${baseURL}${id}`, data)
+        if(response.status < 300) return response
+        else throw new Error("Error en al obtener los enfermedades") 
+    } catch (error) {
+        console.error(error)
+        throw new Error("Error en al obtener los enfermedades")
+    }
+}
+
+export async function deleteEnfermedad(id){
+    try {
+        const response = await axios.delete(`${baseURL}${id}`)
         if(response.status < 300) return response
         else throw new Error("Error en al obtener los enfermedades") 
     } catch (error) {

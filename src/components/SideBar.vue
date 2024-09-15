@@ -12,16 +12,17 @@
       ]">
         <div class="flex-grow flex flex-col">
           <!-- Logo -->
-          <div class="p-4 text-2xl font-bold text-center border-b border-[#2492d1]">
-            {{ appName }}
-          </div>
+          <RouterLink to="/" class="p-4 font-bold text-center border-b border-[#2492d1] flex items-center flex-col">
+            <img src="/icon.png" alt="" width="80">
+            <p class="text-sm">{{ appName }}</p>
+          </RouterLink>
   
           <!-- Navigation -->
           <nav class="flex-grow py-4">
-            <a v-for="item in menuItems" :key="item.name" :href="item.href" class="flex items-center px-6 py-3 text-[#2492d1] border border-[#2492d1] rounded-md mx-2 mb-2 hover:bg-[#2492d1] hover:text-white transition-colors duration-200">
+            <RouterLink v-for="item in menuItems" activeClass="active" :key="item.name" :to="item.href" class="flex items-center px-6 py-3 text-[#2492d1] border border-[#2492d1] rounded-md mx-2 mb-2 hover:bg-[#2492d1] hover:text-white transition-colors duration-200">
               <component :is="item.icon" class="w-5 h-5 mr-3" />
               {{ item.name }}
-            </a>
+            </RouterLink>
           </nav>
   
           <!-- User info -->
@@ -48,7 +49,7 @@
   const props = defineProps({
     appName: {
       type: String,
-      default: 'EpiDemidata'
+      default: 'EpiDemiData'
     },
     menuItems: {
       type: Array,
@@ -76,3 +77,10 @@
 
 
   </script>
+
+<style scoped>
+.active{
+  background-color: #2492d1;
+  color: white;
+}
+</style>

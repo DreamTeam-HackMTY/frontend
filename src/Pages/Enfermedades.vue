@@ -67,7 +67,7 @@
                 required
               ></textarea>
             </div>
-            <div class="mb-4">
+            <!-- <div class="mb-4">
               <label class="block text-gray-700 text-sm font-bold mb-2" for="totalCases">
                 Total de Casos
               </label>
@@ -90,7 +90,7 @@
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
               >
-            </div>
+            </div> -->
             <div class="flex items-center justify-between">
               <button
                 type="submit"
@@ -113,8 +113,9 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
   import { useRouter } from 'vue-router';
+  import { createEnfermedad, readEnfermedades, updateEnfermedad } from '../services/enfermedades';
 
   const router = useRouter();
   const goToDiseaseDashboard = (id) => {
@@ -155,21 +156,27 @@
     editingDisease.value = { name: '', description: '', totalCases: 0, totalDeaths: 0 }
   }
   
-  const addDisease = () => {
-    const newDisease = {
-      ...editingDisease.value,
-      id: diseases.value.length + 1
+  const addDisease = async () => {
+    try {
+      const res = await createEnfermedad(editingDisease.value)
+      diseases.value.push({ ...editingDisease.value, id: res.data.data.id })
+      closeModal()
+    } catch (error) {
+      console.error(error)
     }
-    diseases.value.push(newDisease)
-    closeModal()
   }
   
-  const updateDisease = () => {
-    const index = diseases.value.findIndex(d => d.id === editingDisease.value.id)
-    if (index !== -1) {
-      diseases.value[index] = { ...editingDisease.value }
+  const updateDisease = async () => {
+    try {
+      const res = await updateEnfermedad(editingDisease.value.id, editingDisease.value)
+      const index = diseases.value.findIndex(d => d.id === res.data.data.id)
+      if (index !== -1) {
+        diseases.value[index] = { ...editingDisease.value }
+      }
+      closeModal()
+    } catch (error) {
+      console.error(error)
     }
-    closeModal()
   }
   
   const deleteDisease = (id) => {
@@ -177,4 +184,17 @@
       diseases.value = diseases.value.filter(d => d.id !== id)
     }
   }
+
+  onMounted(() => {
+    readEnfermedades().then(data => {
+      console.log(data.data.data)
+      diseases.value = data.data.data.map(disease => ({
+        id: disease.id,
+        name: disease.name,
+        description: disease.description,
+        totalCases: disease?.totalCases || 0,
+        totalDeaths: disease?.totalDeaths || 0,
+      }))
+    })
+  })
   </script>

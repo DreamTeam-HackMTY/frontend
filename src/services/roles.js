@@ -1,58 +1,58 @@
 import axios from './axios.js';
 
-const baseURL = 'states/'
+const baseURL = 'roles/'
 
-export async function readEstados(){
+export async function readRoles(){
     try {
         const response = await axios.get(`${baseURL}`)
         if(response.status < 300) return response
-        else throw new Error("Error en al obtener los estados") 
+        else throw new Error("Error en al obtener los roles") 
     } catch (error) {
         console.error(error)
-        throw new Error("Error en al obtener los estados")
+        throw new Error("Error en al obtener los roles")
     }
 }
 
-export async function readEstado(id){
+export async function readRol(id){
     try {
         const response = await axios.get(`${baseURL}/${id}`)
         if(response.status < 300) return response
-        else throw new Error("Error en al obtener los estados") 
+        else throw new Error("Error en al obtener los roles") 
     } catch (error) {
         console.error(error)
-        throw new Error("Error en al obtener los estados")
+        throw new Error("Error en al obtener los roles")
     }
 }
 
-export async function createEstado(data){
+export async function createRol(data){
     try {
         const response = await axios.post(`${baseURL}`, data)
         if(response.status < 300) return response
-        else throw new Error("Error en al obtener los estados") 
+        else throw new Error("Error en al obtener los roles") 
     } catch (error) {
         console.error(error)
-        throw new Error("Error en al obtener los estados")
+        throw new Error("Error en al obtener los roles")
     }
 }
 
-export async function updateEstado(id, data){
+export async function updateRol(id, data){
     try {
         const response = await axios.put(`${baseURL}/${id}`, data)
         if(response.status < 300) return response
-        else throw new Error("Error en al obtener los estados") 
+        else throw new Error("Error en al obtener los roles") 
     } catch (error) {
         console.error(error)
-        throw new Error("Error en al obtener los estados")
+        throw new Error("Error en al obtener los roles")
     }
 }
 
-export async function modifyEstado(id, data){
+export async function modifyRol(id, data){
     try {
         const response = await axios.patch(`${baseURL}/${id}`, data)
         if(response.status < 300) return response
-        else throw new Error("Error en al obtener los estados") 
+        else throw new Error("Error en al obtener los roles") 
     } catch (error) {
         console.error(error)
-        throw new Error("Error en al obtener los estados")
+        throw new Error("Error en al obtener los roles")
     }
 }

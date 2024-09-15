@@ -1,6 +1,6 @@
 import axios from './axios.js';
 
-const baseURL = 'casos/'
+const baseURL = 'cases/'
 
 export async function readCasos(){
     try {

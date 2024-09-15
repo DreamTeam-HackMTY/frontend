@@ -56,7 +56,7 @@
               
             </button>
             <button 
-              @click="logout" 
+              @click="cerrarSession" 
               class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Cerrar Sesión
@@ -69,6 +69,8 @@
   
   <script setup>
   import { ref } from 'vue'
+  import { useRouter } from 'vue-router'
+  import { logout } from '../services/session'
   
   const user = ref({
     name: 'Juan Pérez',
@@ -83,10 +85,15 @@
     alert('Perfil actualizado con éxito')
   }
   
-  const logout = () => {
-    // Aquí iría la lógica para cerrar la sesión del usuario
-    console.log('Cerrando sesión')
-    alert('Has cerrado sesión')
-    // Normalmente, aquí redirigirías al usuario a la página de inicio de sesión
+  const cerrarSession = async () => {
+    try {
+      await logout()
+      const router = useRouter()
+      localStorage.clear()
+      router.push('/login')
+    } catch (error) {
+      console.error(error)
+      localStorage.clear()
+    }
   }
   </script>

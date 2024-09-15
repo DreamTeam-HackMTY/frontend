@@ -52,7 +52,7 @@
                     aria-hidden
                     class="absolute inset-0 bg-green-200 opacity-50 rounded-full"
                   ></span>
-                  <span class="relative">{{ user.role }}</span>
+                  <span class="relative">{{ user.role.name }}</span>
                 </span>
               </td>
               <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -112,9 +112,9 @@
                 id="role"
                 v-model="editingUser.role"
               >
-                <option value="Admin">Admin</option>
-                <option value="Editor">Editor</option>
-                <option value="Viewer">Viewer</option>
+              <option :value="rol.id" v-for="rol in roles">
+                {{ rol.name }}
+              </option>
               </select>
             </div>
             <div class="flex items-center justify-between">
@@ -139,7 +139,9 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
+  import { readUsers } from '../services/users.js'
+  import { readRoles }  from '../services/roles.js'
   
   // Datos de ejemplo (reemplazar con datos reales o llamadas a API)
   const users = ref([
@@ -148,12 +150,13 @@
     { id: 3, username: 'bob_johnson', email: 'bob@example.com', role: 'Viewer', avatar: '/placeholder.svg?height=40&width=40' },
   ])
   
+  const roles = ref()
   const showModal = ref(false)
   const editingUser = ref({})
   const isEditing = ref(false)
   
   const editUser = (user) => {
-    editingUser.value = { ...user }
+    editingUser.value = { ...user, role: user.role.id }
     isEditing.value = true
     showModal.value = true
   }
@@ -192,6 +195,25 @@
       users.value = users.value.filter(u => u.id !== userId)
     }
   }
+
+  onMounted(() => {
+    readUsers().then(data => {
+      users.value = data.data.data.map(user => ({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.roles[0],
+        avatar: user?.avatar || '/placeholder.svg?height=40&width=40'
+      }))
+    })
+    readRoles().then(data => {
+      roles.value = data.data.data.map(role => ({
+        id: role.id,
+        name: role.name
+      }))
+      console.log(roles.value)      
+    })
+  })
   </script>
   
   <style scoped>
