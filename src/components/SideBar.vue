@@ -1,6 +1,5 @@
 <template>
     <div>
-
       <!-- Toggle button for mobile -->
     <button @click="toggleMenu" class="lg:hidden fixed top-4 left-4 z-20 bg-[#2492d1] text-white p-2 rounded-md">
       <MenuIcon v-if="!isOpen" />
@@ -54,7 +53,7 @@
     menuItems: {
       type: Array,
       default: () => [
-        { name: 'Dashboard', icon: HomeIcon, href: '/' },
+        { name: 'Enfermedaes', icon: HomeIcon, href: '/' },
         { name: 'Enfermedades', icon: ChartBarIcon, href: '/estadisticas' },
         { name: 'Reportes', icon: FileTextIcon, href: '/reportes' },
         { name: 'Usuarios', icon: UsersIcon, href: '/usuarios' },
