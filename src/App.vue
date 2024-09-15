@@ -1,13 +1,15 @@
-<script setup>
-
-</script>
-
 <template>
-  <h1 className="text-3xl font-bold underline">
-      Hello world!
-  </h1>
+  <SideBar 
+    :user-name="'María García'" 
+    :user-role="'Investigadora'"/>
+  <div class="flex-1 p-4 lg:ml-64 bg-[#2492d1]" style="height: 67px;">
+  </div>
+  <div class="flex-1 p-4 lg:ml-64">
+    Hola
+  </div>
 </template>
 
-<style scoped>
-
-</style>
+<script setup>
+import SideBar from './components/SideBar.vue'
+import { HomeIcon, ChartBarIcon, FileTextIcon } from 'lucide-vue-next'
+</script>
