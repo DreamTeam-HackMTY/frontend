@@ -28,10 +28,10 @@
           <!-- User info -->
           <div class="p-4 border-t border-[#2492d1]">
             <div class="flex items-center">
-              <img :src="'/babyoda.png'" :alt="userName" class="w-20 h-20 rounded-full mr-3 border-2 border-[#2492d1]" />
+              <img :src="'/babyoda.png'" alt="" class="w-20 h-20 rounded-full mr-3 border-2 border-[#2492d1]" />
               <div>
-                <p class="font-semibold">{{ userName }}</p>
-                <p class="text-sm text-gray-600">{{ userRole }}</p>
+                <p class="font-semibold">{{ user.data.username }}</p>
+                <p class="text-sm text-gray-600">{{ user.data.roles[0].name }}</p>
               </div>
             </div>
           </div>
@@ -46,6 +46,7 @@
   import { HomeIcon, ChartBarIcon, FileTextIcon, UsersIcon, SettingsIcon, MenuIcon, XIcon } from 'lucide-vue-next'
   // Añadimos el nombre del componente
   const __name = 'SideBar'
+  const user = JSON.parse(localStorage.getItem('user'))
   const props = defineProps({
     appName: {
       type: String,
@@ -61,7 +62,7 @@
     },
     userName: {
       type: String,
-      default: 'John Doe'
+      default: 'Maria García'
     },
     userRole: {
       type: String,

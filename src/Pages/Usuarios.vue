@@ -144,11 +144,7 @@
   import { readRoles }  from '../services/roles.js'
   
   // Datos de ejemplo (reemplazar con datos reales o llamadas a API)
-  const users = ref([
-    { id: 1, username: 'john_doe', email: 'john@example.com', role: 'Admin', avatar: '/placeholder.svg?height=40&width=40' },
-    { id: 2, username: 'jane_smith', email: 'jane@example.com', role: 'Editor', avatar: '/placeholder.svg?height=40&width=40' },
-    { id: 3, username: 'bob_johnson', email: 'bob@example.com', role: 'Viewer', avatar: '/placeholder.svg?height=40&width=40' },
-  ])
+  const users = ref()
   
   const roles = ref()
   const showModal = ref(false)

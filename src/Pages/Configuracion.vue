@@ -15,7 +15,7 @@
                 </label>
                 <input 
                   id="name" 
-                  v-model="user.name" 
+                  v-model="user.data.username" 
                   type="text" 
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#2492d1]"
                   disabled
@@ -27,7 +27,7 @@
                 </label>
                 <input 
                   id="email" 
-                  v-model="user.email" 
+                  v-model="user.data.email" 
                   type="email" 
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#2492d1]"
                   disabled
@@ -39,7 +39,7 @@
                 </label>
                 <input 
                   id="role" 
-                  v-model="user.role" 
+                  v-model="user.data.roles[0].name" 
                   type="text" 
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#2492d1]"
                   disabled
@@ -71,13 +71,7 @@
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
   import { logout } from '../services/session'
-  
-  const user = ref({
-    name: 'Juan Pérez',
-    email: 'juan.perez@example.com',
-    role: 'Administrador',
-    photoUrl: '/placeholder.svg?height=128&width=128'
-  })
+  const user = JSON.parse(localStorage.getItem('user'))
   
   const updateProfile = () => {
     // Aquí iría la lógica para actualizar el perfil del usuario
