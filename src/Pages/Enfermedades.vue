@@ -12,8 +12,8 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div v-for="disease in diseases" :key="disease.id" 
         class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
-        @click="goToDiseaseDashboard(disease.id, disease.name)" >
-          <div class="p-6">
+        >
+          <div class="p-6" @click="goToDiseaseDashboard(disease.id, disease.name)">
             <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ disease.name }}</h3>
             <p class="text-gray-600 mb-4">{{ disease.description }}</p>
             <div class="flex justify-between text-sm text-gray-500">
