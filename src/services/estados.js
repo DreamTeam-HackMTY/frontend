@@ -12,6 +12,16 @@ export async function readEstados(){
         throw new Error("Error en al obtener los estados")
     }
 }
+export async function readEnfermedades(id){
+    try {
+        const response = await axios.get(`${baseURL}?disease_id=${id}`)
+        if(response.status < 300) return response
+        else throw new Error("Error en al obtener los enfermedades") 
+    } catch (error) {
+        console.error(error)
+        throw new Error("Error en al obtener los enfermedades")
+    }
+}
 
 export async function readEstado(id){
     try {
