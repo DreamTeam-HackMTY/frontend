@@ -1,91 +1,113 @@
 <template>
-    <div class="login">
-        <div class="image-container">
-            <img :src="'/epidemia.png'" alt="Descripción de la imagen" class="login-image" />
-        </div>
-        <div class="form-container">
-            <h1 class="title">Login in the page</h1>
-            <form action class="form">
-                <label class="form-label" for="#email">Email:</label>
-                <input class="form-input" type="email" id="email" required placeholder="Email" />
-                <label class="form-label" for="#password">Password:</label>
-                <input class="form-input" type="password" id="password" placeholder="Password" />
-                <input class="form-submit" type="submit" value="Login" />
+    <div class="min-h-screen flex items-center justify-center bg-blue-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <div>
+                <img class="mx-auto h-48 w-auto" :src="'/logo.png'" alt="EpiDemidata Logo" />
+                <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                    Iniciar sesión en EpiDemidata
+                </h2>
+                <p class="mt-2 text-center text-sm text-gray-600">
+                    Accede a tu cuenta para gestionar datos epidemiológicos
+                </p>
+            </div>
+            <form class="mt-8 space-y-6" @submit.prevent="handleSubmit">
+                <div class="rounded-md shadow-sm -space-y-px">
+                    <div>
+                        <label for="email-address" class="sr-only">Correo electrónico</label>
+                        <input id="email-address" name="email" type="email" autocomplete="email" required
+                            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-[#2492d1] focus:border-[#2492d1] focus:z-10 sm:text-sm"
+                            placeholder="Correo electrónico" v-model="email" />
+                    </div>
+                    <div>
+                        <label for="password" class="sr-only">Contraseña</label>
+                        <input id="password" name="password" type="password" autocomplete="current-password" required
+                            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-[#2492d1] focus:border-[#2492d1] focus:z-10 sm:text-sm"
+                            placeholder="Contraseña" v-model="password" />
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input id="remember-me" name="remember-me" type="checkbox"
+                            class="h-4 w-4 text-[#2492d1] focus:ring-[#2492d1] border-gray-300 rounded" />
+                        <label for="remember-me" class="ml-2 block text-sm text-gray-900">
+                            Recordarme
+                        </label>
+                    </div>
+
+                    <div class="text-sm">
+                        <a href="#" class="font-medium text-[#2492d1] hover:text-[#1c74a5]">
+                            ¿Olvidaste tu contraseña?
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit"
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#2492d1] hover:bg-[#1c74a5] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2492d1]">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                           
+                        </span>
+                        Iniciar sesión
+                    </button>
+                </div>
             </form>
+
+            <div class="mt-6">
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-gray-50 text-gray-500">
+                            O continúa con
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mt-6 grid grid-cols-3 gap-3">
+                    <div>
+                        <a href="#"
+                            class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <span class="sr-only">Iniciar sesión con Facebook</span>
+                            
+                        </a>
+                    </div>
+
+                    <div>
+                        <a href="#"
+                            class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <span class="sr-only">Iniciar sesión con Twitter</span>
+                            
+                        </a>
+                    </div>
+
+                    <div>
+                        <a href="#"
+                            class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <span class="sr-only">Iniciar sesión con GitHub</span>
+                            
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { ref } from 'vue'
+
+const email = ref('')
+const password = ref('')
+
+const handleSubmit = () => {
+    // Aquí iría la lógica para manejar el inicio de sesión
+    console.log('Iniciando sesión con:', { email: email.value, password: password.value })
+    // Normalmente, aquí enviarías los datos a tu backend para autenticación
+}
 </script>
 
-<style lang="scss" scoped>
-.login {
-    display: flex;
-    padding: 2rem;
-}
-
-.image-container,
-.form-container {
-    flex: 1;
-}
-
-.login-image {
-    width: 100%;
-    height: auto;
-}
-
-.title {
-    text-align: center;
-}
-
-.form {
-    margin: 3rem auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 80%;
-    background: rgba(37, 146, 209, 1);
-    border-radius: 5px;
-    padding: 40px;
-    box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
-}
-
-.form-label {
-    margin-top: 2rem;
-    color: rgb(255, 255, 255);
-    margin-bottom: 0.5rem;
-
-    &:first-of-type {
-        margin-top: 0rem;
-    }
-}
-
-.form-input {
-    padding: 10px 15px;
-    background: white;
-    background-image: none;
-    border: 1px solid white;
-    color: black;
-
-    &:focus {
-        outline: 0;
-        border-color: #202020;
-    }
-}
-
-.form-submit {
-    background: #000000;
-    border: none;
-    color: white;
-    margin-top: 3rem;
-    padding: 1rem 0;
-    cursor: pointer;
-    transition: background 0.2s;
-
-    &:hover {
-        background: #202020;
-    }
-}
+<style scoped>
+/* Puedes agregar estilos adicionales aquí si es necesario */
 </style>
